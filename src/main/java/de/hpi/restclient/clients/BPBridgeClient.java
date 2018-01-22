@@ -29,8 +29,8 @@ public class BPBridgeClient {
         return getRestTemplate().getForObject(getShopIDToUrlURI(shopID), ShopIDToUrlResponse.class);
     }
 
-    public GetRandomOffersResponse getRandomOffer(long shopID) {
-        return getRestTemplate().getForObject(getGetRandomOffersURI(shopID), GetRandomOffersResponse.class);
+    public GetRandomOffersResponse getRandomOffer(long shopID, int maxCount) {
+        return getRestTemplate().getForObject(getGetRandomOffersURI(shopID, maxCount), GetRandomOffersResponse.class);
     }
 
     private URI getShopIDToUrlURI(long shopID) {
@@ -42,11 +42,11 @@ public class BPBridgeClient {
                 .toUri();
     }
 
-    private URI getGetRandomOffersURI(long shopID) {
+    private URI getGetRandomOffersURI(long shopID, int maxCount) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getGetRandomOfferRoute())
                 .queryParam("shopID", shopID)
-                .queryParam("count", getProperties().getMaxCount())
+                .queryParam("count", maxCount)
                 .build()
                 .encode()
                 .toUri();

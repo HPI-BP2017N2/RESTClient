@@ -16,10 +16,6 @@ import javax.validation.constraints.Min;
 @Getter @Setter
 public class BPBridgeProperties {
 
-    @Min(1)
-    @Max(100)
-    private int maxCount;
-
     @NotBlank
     private String root, shopIDToURLRoute, getRandomOfferRoute;
 
