@@ -6,7 +6,6 @@ import de.hpi.restclient.properties.BPBridgeProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +20,6 @@ public class BPBridgeClient {
     private BPBridgeProperties properties;
     private RestTemplate restTemplate;
 
-    @Autowired
     public BPBridgeClient(BPBridgeProperties properties, RestTemplateBuilder restTemplateBuilder) {
         setProperties(properties);
         setRestTemplate(restTemplateBuilder.build());
