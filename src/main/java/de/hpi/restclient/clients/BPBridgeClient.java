@@ -33,6 +33,11 @@ public class BPBridgeClient {
         return getRestTemplate().getForObject(getGetRandomOffersURI(shopID, maxCount), GetRandomOffersResponse.class);
     }
 
+    public GetRandomOffersResponse getRandomOffer(long shopID, int maxCount, int offset) {
+        return getRestTemplate().getForObject(getGetRandomOffersURI(shopID, maxCount, offset), GetRandomOffersResponse
+                .class);
+    }
+
     private URI getShopIDToUrlURI(long shopID) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getShopIDToURLRoute())
@@ -47,6 +52,17 @@ public class BPBridgeClient {
                 .path(getProperties().getGetRandomOfferRoute())
                 .queryParam("shopID", shopID)
                 .queryParam("count", maxCount)
+                .build()
+                .encode()
+                .toUri();
+    }
+
+    private URI getGetRandomOffersURI(long shopID, int maxCount, int offset) {
+        return UriComponentsBuilder.fromUriString(getProperties().getRoot())
+                .path(getProperties().getGetRandomOfferRoute())
+                .queryParam("shopID", shopID)
+                .queryParam("count", maxCount)
+                .queryParam("offset", offset)
                 .build()
                 .encode()
                 .toUri();
