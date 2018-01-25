@@ -8,5 +8,5 @@ import java.util.HashMap;
 @Getter @Setter
 public class Rules {
 
-    private HashMap<String, Rule> rules;
+    private HashMap<OfferAttribute, Rule> rules;
 }

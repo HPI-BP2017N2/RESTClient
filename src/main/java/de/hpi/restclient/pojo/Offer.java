@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,22 +18,18 @@ public class Offer {
     private Number shopId;
     private String currency, sku, han, brandSearchtext, categoryString, ean, attrSearchtext, productSearchtext;
 
-    /*
+     /*
         Java reflection is used and indicates possible bad code style, but ensures code flexibility.
         Reconsider this code snippet maybe.
      */
 
-    /**
-     * @return Returns a map containing the attribute name - value pairs of this class
-     * @throws IllegalAccessException Gets thrown if any JavaReflection access failed.
-     */
     @JsonIgnore
-    public HashMap<String, String> getOfferSnapshot() throws IllegalAccessException {
-        HashMap<String, String> snapshot = new HashMap<>();
-        Field[] fields = getClass().getDeclaredFields();
-        for (Field field : fields) {
-            field.setAccessible(true);
-            snapshot.put(field.getName(), getValue(field.get(this)));
+    public EnumMap<OfferAttribute, String> getOfferSnapshot() throws NoSuchFieldException, IllegalAccessException {
+        EnumMap<OfferAttribute, String> snapshot = new EnumMap<>(OfferAttribute.class);
+        for (OfferAttribute offerAttribute : OfferAttribute.values()) {
+            Field offerAttributeField = getClass().getDeclaredField(convertOfferAttributeToFieldName(offerAttribute));
+            offerAttributeField.setAccessible(true);
+            snapshot.put(offerAttribute, getValue(offerAttributeField.get(this)));
         }
         return snapshot;
     }
@@ -55,5 +51,18 @@ public class Offer {
             return object.toString();
         }
         return null;
+    }
+
+    //conversion
+    private String convertOfferAttributeToFieldName(OfferAttribute offerAttribute) {
+        StringBuilder fieldName = new StringBuilder(offerAttribute.toString().toLowerCase());
+        int underscoreIndex = -1;
+        while ((underscoreIndex = fieldName.indexOf("_")) != -1) {
+            fieldName.deleteCharAt(underscoreIndex);
+            if (underscoreIndex < fieldName.length()) {
+                fieldName.setCharAt(underscoreIndex, Character.toUpperCase(fieldName.charAt(underscoreIndex)));
+            }
+        }
+        return fieldName.toString();
     }
 }

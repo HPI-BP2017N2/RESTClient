@@ -7,6 +7,6 @@ import lombok.Setter;
 public class RuleEntry {
 
     private boolean resultAsPlainText;
-    private String xPath, attribute;
+    private String attribute, selector;
 
 }

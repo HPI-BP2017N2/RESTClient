@@ -9,5 +9,5 @@ import java.util.List;
 public class Rule {
 
     private List<RuleEntry> entries;
-    private String attribute;
+    private OfferAttribute attribute;
 }
