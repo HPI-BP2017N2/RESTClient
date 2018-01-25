@@ -53,7 +53,14 @@ public class Offer {
         return null;
     }
 
+    /**
+     * This method makes every char lower case at first.
+     * After this initial step it looks up every underscore and removes it. The following character gets capitalized.
+     * @param offerAttribute The enum for the requested field.
+     * @return The field name for the enum.
+     */
     //conversion
+    @JsonIgnore
     private String convertOfferAttributeToFieldName(OfferAttribute offerAttribute) {
         StringBuilder fieldName = new StringBuilder(offerAttribute.toString().toLowerCase());
         int underscoreIndex = -1;
