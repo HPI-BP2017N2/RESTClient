@@ -22,5 +22,6 @@ public enum OfferAttribute {
     PRODUCT_SEARCHTEXT,
     SHOP_ID,
     SKU,
-    URL
+    URL,
+    OFFER_ID
 }

@@ -1,6 +1,7 @@
 package de.hpi.restclient.clients;
 
 import de.hpi.restclient.dto.GetRandomOffersResponse;
+import de.hpi.restclient.dto.MatchAttributeResponse;
 import de.hpi.restclient.dto.ShopIDToUrlResponse;
 import de.hpi.restclient.properties.BPBridgeProperties;
 import lombok.AccessLevel;
@@ -38,6 +39,11 @@ public class BPBridgeClient {
                 .class);
     }
 
+    public MatchAttributeResponse matchAttribute(long shopID, String searchAttribute, String attributeValue) {
+        return getRestTemplate().getForObject(matchAttributeURI(shopID, searchAttribute, attributeValue ),
+                MatchAttributeResponse.class);
+    }
+
     private URI getShopIDToUrlURI(long shopID) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getShopIDToURLRoute())
@@ -63,6 +69,17 @@ public class BPBridgeClient {
                 .queryParam("shopID", shopID)
                 .queryParam("count", maxCount)
                 .queryParam("offset", offset)
+                .build()
+                .encode()
+                .toUri();
+    }
+
+    private URI matchAttributeURI(long shopID, String searchAttribute, String attributeValue) {
+        return UriComponentsBuilder.fromUriString(getProperties().getRoot())
+                .path(getProperties().getMatchAttributeRoute())
+                .queryParam("shopID",shopID)
+                .queryParam("searchAttribute",searchAttribute)
+                .queryParam("attributeValue",attributeValue)
                 .build()
                 .encode()
                 .toUri();

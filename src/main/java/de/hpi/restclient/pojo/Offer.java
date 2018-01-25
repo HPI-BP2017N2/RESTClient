@@ -15,7 +15,7 @@ public class Offer {
     private List<String> categoryPaths;
     private Map<String, Number> price;
     private Map<String, String> description, offerTitle, url;
-    private Number shopId;
+    private Number shopId, offerId;
     private String currency, sku, han, brandSearchtext, categoryString, ean, attrSearchtext, productSearchtext;
 
      /*
