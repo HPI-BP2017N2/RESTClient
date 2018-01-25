@@ -63,7 +63,7 @@ public class Offer {
     @JsonIgnore
     private String convertOfferAttributeToFieldName(OfferAttribute offerAttribute) {
         StringBuilder fieldName = new StringBuilder(offerAttribute.toString().toLowerCase());
-        int underscoreIndex = -1;
+        int underscoreIndex;
         while ((underscoreIndex = fieldName.indexOf("_")) != -1) {
             fieldName.deleteCharAt(underscoreIndex);
             if (underscoreIndex < fieldName.length()) {
