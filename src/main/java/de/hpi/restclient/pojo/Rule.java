@@ -10,4 +10,12 @@ public class Rule {
 
     private List<RuleEntry> entries;
     private OfferAttribute attribute;
+
+    public Rule() {
+    }
+
+    public Rule(List<RuleEntry> entries, OfferAttribute attribute) {
+        setEntries(entries);
+        setAttribute(attribute);
+    }
 }
