@@ -65,7 +65,7 @@
     <distributionManagement>
         <repository>
             <id>ts7903.byod.hpi.de</id>
-            <url>ftp://ts7903.byod.hpi.de/maven3</url>
+            <url>ftp://172.18.20.121/maven3</url>
         </repository>
     </distributionManagement>
 </project>
