@@ -40,7 +40,7 @@ public class BPBridgeClient {
     }
 
     public MatchAttributeResponse matchAttribute(long shopID, String searchAttribute, String attributeValue) {
-        return getRestTemplate().getForObject(matchAttributeURI(shopID, searchAttribute, attributeValue ),
+        return getRestTemplate().getForObject(getMatchAttributeURI(shopID, searchAttribute, attributeValue ),
                 MatchAttributeResponse.class);
     }
 
@@ -74,7 +74,7 @@ public class BPBridgeClient {
                 .toUri();
     }
 
-    private URI matchAttributeURI(long shopID, String searchAttribute, String attributeValue) {
+    private URI getMatchAttributeURI(long shopID, String searchAttribute, String attributeValue) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getMatchAttributeRoute())
                 .queryParam("shopID",shopID)
