@@ -16,8 +16,7 @@ pipeline {
         stage('Publish') {
             steps {
                 configFileProvider([configFile(fileId: '4712d7e9-ba97-45c2-b20a-2f24c5dc12b7', variable: 'publish')]) {
-                    echo '$publish'
-                    sh '$publish'
+                    sh 'bash $publish'
                 }
             }
         }
