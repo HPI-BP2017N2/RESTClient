@@ -17,7 +17,7 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: '4712d7e9-ba97-45c2-b20a-2f24c5dc12b7', variable: 'publish')])
                 {
-                 sshagent ([9b1afd2e-3746-4877-bdc6-077c2cf82b68])
+                 sshagent (['9b1afd2e-3746-4877-bdc6-077c2cf82b68'])
                  {
                     sh 'bash $publish'
                 }
