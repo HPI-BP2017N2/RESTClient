@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @EnableConfigurationProperties
-@ConfigurationProperties("bpbridge")
+@ConfigurationProperties("urlcleaner")
 @Getter @Setter
 public class URLCleanerProperties {
 
