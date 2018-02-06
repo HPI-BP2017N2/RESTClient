@@ -11,6 +11,8 @@ public class MatchingResponse {
     private boolean isIdealoOffer;
 
     // initialization
+    public MatchingResponse(){}
+
     public MatchingResponse(Number shopId, String url, String parsedCategory){
         self().setIdealoOffer(false);
         self().setShopId(shopId);
