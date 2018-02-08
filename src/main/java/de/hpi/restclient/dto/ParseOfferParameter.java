@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 public class ParseOfferParameter {
 
-    private Rules rules;
+    private long shopID;
     private String html;
 }
