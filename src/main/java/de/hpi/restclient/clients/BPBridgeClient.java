@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Map;
 
 @Component
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
@@ -41,6 +42,11 @@ public class BPBridgeClient {
 
     public MatchAttributeResponse matchAttribute(long shopID, String searchAttribute, String attributeValue) {
         return getRestTemplate().getForObject(getMatchAttributeURI(shopID, searchAttribute, attributeValue ),
+                MatchAttributeResponse.class);
+    }
+
+    public MatchAttributeResponse matchAttributeWithMap(long shopID, String searchAttribute, Map<String, String> attributeValue) {
+        return getRestTemplate().getForObject(getMatchAttributeWithMapURI(shopID, searchAttribute, attributeValue ),
                 MatchAttributeResponse.class);
     }
 
@@ -75,6 +81,17 @@ public class BPBridgeClient {
     }
 
     private URI getMatchAttributeURI(long shopID, String searchAttribute, String attributeValue) {
+        return UriComponentsBuilder.fromUriString(getProperties().getRoot())
+                .path(getProperties().getMatchAttributeRoute())
+                .queryParam("shopID",shopID)
+                .queryParam("searchAttribute",searchAttribute)
+                .queryParam("attributeValue",attributeValue)
+                .build()
+                .encode()
+                .toUri();
+    }
+
+    private URI getMatchAttributeWithMapURI(long shopID, String searchAttribute, Map attributeValue) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getMatchAttributeRoute())
                 .queryParam("shopID",shopID)
