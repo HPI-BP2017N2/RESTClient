@@ -1,4 +1,4 @@
-package de.hpi.restclient.dto;
+package de.hpi.restclient.pojo;
 
 public class UnsuccessfulMatchingResponse extends MatchingResponse {
 
