@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter @Setter
 public class GetRulesResponse {
 
-    private ExtractedDataMap extractedDataMap;
+    private Rules rules;
 }
