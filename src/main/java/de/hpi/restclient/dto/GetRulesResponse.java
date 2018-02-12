@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter @Setter
 public class GetRulesResponse {
 
+    private long shopID;
     private Rules rules;
 }
