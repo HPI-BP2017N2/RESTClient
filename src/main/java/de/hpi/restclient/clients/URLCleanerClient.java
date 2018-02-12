@@ -26,14 +26,15 @@ public class URLCleanerClient {
         setRestTemplate(restTemplateBuilder.build());
     }
 
-    public CleanURLResponse cleanURL(String url) {
-        return getRestTemplate().getForObject(getCleanURLURI(url), CleanURLResponse.class);
+    public CleanURLResponse cleanURL(String url, long shopID) {
+        return getRestTemplate().getForObject(getCleanURLURI(url, shopID), CleanURLResponse.class);
     }
 
-    private URI getCleanURLURI(String url) {
+    private URI getCleanURLURI(String url, long shopID) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getCleanURLRoute())
                 .queryParam("url", url)
+                .queryParam("shopID", shopID)
                 .build()
                 .encode()
                 .toUri();
