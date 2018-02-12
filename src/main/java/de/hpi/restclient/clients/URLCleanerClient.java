@@ -12,7 +12,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 @Component
 @Getter(AccessLevel.PRIVATE) @Setter(AccessLevel.PRIVATE)
@@ -26,14 +29,14 @@ public class URLCleanerClient {
         setRestTemplate(restTemplateBuilder.build());
     }
 
-    public CleanURLResponse cleanURL(String url, long shopID) {
+    public CleanURLResponse cleanURL(String url, long shopID) throws UnsupportedEncodingException {
         return getRestTemplate().getForObject(getCleanURLURI(url, shopID), CleanURLResponse.class);
     }
 
-    private URI getCleanURLURI(String url, long shopID) {
+    private URI getCleanURLURI(String url, long shopID) throws UnsupportedEncodingException {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getCleanURLRoute())
-                .queryParam("url", url)
+                .queryParam("url", URLEncoder.encode(url, "UTF-8"))
                 .queryParam("shopID", shopID)
                 .build()
                 .encode()
