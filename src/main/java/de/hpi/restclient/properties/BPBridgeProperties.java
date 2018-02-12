@@ -16,7 +16,6 @@ import javax.validation.constraints.Min;
 @Getter @Setter
 public class BPBridgeProperties {
 
-    @NotBlank
     private String root, shopIDToURLRoute, getRandomOfferRoute, matchAttributeRoute;
 
 }

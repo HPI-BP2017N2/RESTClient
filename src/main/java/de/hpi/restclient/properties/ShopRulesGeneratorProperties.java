@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Getter @Setter
 public class ShopRulesGeneratorProperties {
 
-    @NotBlank
     private String root, getRulesRoute;
 
 }

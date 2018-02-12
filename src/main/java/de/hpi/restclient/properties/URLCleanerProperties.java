@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Getter @Setter
 public class URLCleanerProperties {
 
-    @NotBlank
     private String root, cleanURLRoute;
 
 }
