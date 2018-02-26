@@ -1,5 +1,6 @@
 package de.hpi.restclient.clients;
 
+import de.hpi.restclient.dto.GetRulesResponse;
 import de.hpi.restclient.dto.MatchAttributeResponse;
 import de.hpi.restclient.pojo.ExtractedDataMap;
 import de.hpi.restclient.pojo.Rules;
@@ -27,16 +28,14 @@ public class ShopRulesGeneratorClient {
         setRestTemplate(restTemplateBuilder.build());
     }
 
-    public void getRules(long shopID, String responseRoot, String responsePath) {
-        getRestTemplate().getForObject(getRulesURI(shopID, responseRoot, responsePath), String.class);
+    public GetRulesResponse getRules(long shopID) {
+       return getRestTemplate().getForObject(getRulesURI(shopID), GetRulesResponse.class);
     }
 
-    private URI getRulesURI(long shopID, String responseRoot, String responsePath) {
+    private URI getRulesURI(long shopID) {
         return UriComponentsBuilder.fromUriString(getProperties().getRoot())
                 .path(getProperties().getGetRulesRoute())
                 .queryParam("shopID", shopID)
-                .queryParam("responseRoot", responseRoot)
-                .queryParam("responsePath", responsePath)
                 .build()
                 .encode()
                 .toUri();
